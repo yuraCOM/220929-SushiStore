@@ -26,7 +26,6 @@ const Orders = observer(() => {
             setOrders(await getOrders())
         }
         fetchData()
-
     }, [])
 
 
@@ -45,10 +44,9 @@ const Orders = observer(() => {
         fetchData()
     }
 
-
     function delFromOrders(e, item) {
         if (item.orderCompleted) {
-            alert("Удалить нельяз! Заказ Выполнен!")
+            alert("Удалить нельзя! Заказ Выполнен!")
         } else {
             fetchData()
         }
@@ -60,7 +58,6 @@ const Orders = observer(() => {
     }
 
     function userInfo(user) {
-        console.log(user);
         setChooiseUser(user)
         hideShowUserInfo(true)
     }
@@ -77,10 +74,10 @@ const Orders = observer(() => {
                     <div key={str_randLen(7)} className={item.orderCompleted ? "flex order-admin complited" : "flex order-admin"}>
                         <p>{moment(item.time).format('MMM Do YY, h:mm: a')}</p>
                         <p>№ {item.orderId}</p>
-                        <p>{item.totalSum}грн</p>
+                        <p>TotalSum: {item.totalSum}грн</p>
                         <p>UserId:{item.user.id}</p>
                         {/* <p>{item.orderCompleted}</p> */}
-                        <button onClick={() => userInfo(item.user)}>Name:{item.user.userName}</button>
+                        <button className='btn-orders' onClick={() => userInfo(item.user)}>Name:{item.user.userName}</button>
                         <button className='btn-orders' onClick={() => orderInfo(item.dishInOrder, item.orderId, item.orderCompleted)}>OrderInfo</button>
                         <div className='div-completed'>
                             <label htmlFor="#box4">Completed:</label>

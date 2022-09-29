@@ -4,13 +4,14 @@ import { MainStore } from '../../Store/MainStore'
 import './styleCreateDish.css'
 import Modal from 'react-bootstrap/Modal';
 import { Button } from 'react-bootstrap';
-import { randomN, str_randLen } from '../../Tools/random';
+import { randomN } from '../../Tools/random';
 import { addToBase } from '../../Tools/assist';
 import { storage } from "../../FireBase/firebase";
 import { ref, uploadBytes } from 'firebase/storage';
 
 
 
+// @ts-ignore
 const CreateDish = observer(({ show, onHide }) => {
 
     let shopStore = MainStore.shopStore
@@ -51,6 +52,7 @@ const CreateDish = observer(({ show, onHide }) => {
     const [about, setAbout] = useState('')
     const [diffInfo, setDiffInfo] = useState('')
 
+    // eslint-disable-next-line no-unused-vars
     const [img, setImg] = useState('')
     const [fileImage, setFileImage] = useState(null)
 
@@ -58,20 +60,25 @@ const CreateDish = observer(({ show, onHide }) => {
     useEffect(() => {
 
         // пункты меню - для выпадающего списка
+        // eslint-disable-next-line array-callback-return
         let storeMenuArr = shopStore.menuStart.map(item => {
             for (const [key, value] of Object.entries(item)) {
                 return <option key={randomN()} value={key}>{value.toUpperCase()}</option>
             }
         })
+        // @ts-ignore
         setStore(storeMenuArr)
 
+        // eslint-disable-next-line array-callback-return
         let storeTypeArr = shopStore.menuType.map(item => {
             for (const [key, value] of Object.entries(item)) {
                 return <option key={randomN()} value={key}>{value.toUpperCase()}</option>
             }
         })
+        // @ts-ignore
         setStoreType(storeTypeArr)
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -122,6 +129,7 @@ const CreateDish = observer(({ show, onHide }) => {
     const uploadFiles = (file) => {
         if (!file) return
         const storageRef = ref(storage, `images/${file.name}`)
+        // @ts-ignore
         uploadBytes(storageRef, file).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
@@ -141,7 +149,9 @@ const CreateDish = observer(({ show, onHide }) => {
             </Modal.Header>
             <Modal.Body>
 
-                <form action="submite" onSubmit={(e) => { console.log("data"); }}>
+                <form action="submite" onSubmit={(
+                    // @ts-ignore
+                    e) => { console.log("data"); }}>
                     <div className='flex-col'>
                         <div>
                             {/* store select - общее меню */}
@@ -189,6 +199,7 @@ const CreateDish = observer(({ show, onHide }) => {
                             <input required={true} type="number" min={0} value={price}
                                 onChange={(e) => {
                                     setNewDish({ ...newDish, 'price': Number(e.target.value) })
+                                    // @ts-ignore
                                     setPrice(e.target.value)
                                 }}>
 
@@ -201,6 +212,7 @@ const CreateDish = observer(({ show, onHide }) => {
                             <input type="number" min={0} value={qnty}
                                 onChange={(e) => {
                                     setNewDish({ ...newDish, 'qnty': Number(e.target.value) })
+                                    // @ts-ignore
                                     setQnty(e.target.value)
                                 }}>
                             </input>
@@ -212,13 +224,16 @@ const CreateDish = observer(({ show, onHide }) => {
                             <input type="number" min={0} value={weight}
                                 onChange={(e) => {
                                     setNewDish({ ...newDish, 'weight': Number(e.target.value) })
+                                    // @ts-ignore
                                     setWeight(e.target.value)
                                 }}>
                             </input>
                         </div>
 
                         {/* about */}
-                        <textarea type="text" placeholder='Описание' value={about || ""}
+                        <textarea
+                            // @ts-ignore
+                            type="text" placeholder='Описание' value={about || ""}
                             onChange={(e) => {
                                 setNewDish({ ...newDish, 'about': e.target.value })
                                 setAbout(e.target.value)
@@ -239,7 +254,9 @@ const CreateDish = observer(({ show, onHide }) => {
                             }}>
                         </input> */}
                         <input type="file" onChange={(e) => {
+                            // @ts-ignore
                             setNewDish({ ...newDish, 'img': e.target.files[0].name })
+                            // @ts-ignore
                             setFileImage(e.target.files[0])
                         }} />
                     </div>

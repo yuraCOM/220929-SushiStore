@@ -10,30 +10,6 @@ const AppRouter = observer(() => {
 
     let currenUserNow = MainStore.userNow
 
-    // let dataLocalStore = localStorage.getItem('userSushi')
-    // if (dataLocalStore === undefined) {
-    //     localStorage.removeItem('userSushi');
-    //     console.log("undefined");
-    // } else {
-    //     // currenUserNow.setIsAuth(true)
-    //     // currenUserNow.setUser(dataLocalStore)
-    // }
-
-    // useEffect(() => {
-    //     if (localStorage.userSushi) {
-
-    //         let data = JSON.parse(localStorage.getItem('userSushi'))
-    //         if (data === 'undefined') {
-    //             console.log('undef');
-    //             localStorage.removeItem('userSushi');
-    //         } else {
-    //             currenUserNow.setIsAuth(true)
-    //             currenUserNow.setUser(data)
-    //         }
-    //     }
-    // }, [])
-
-
     return (
 
         <Routes>

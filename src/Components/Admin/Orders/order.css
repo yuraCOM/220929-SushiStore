@@ -51,6 +51,7 @@
 .order-admin .btn-orders {
     width: 20%;
     margin: 0 5px;
+    background-color: #898181;
 }
 
 .order-admin button:hover {

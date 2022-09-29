@@ -16,9 +16,11 @@ const Menu = observer(() => {
 
     useEffect(() => {
         callMenuTypeFood(shopStore.currentType)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
+    // eslint-disable-next-line array-callback-return
     let mainMainBtnBlock = shopStore.menuStart.map(item => {
         for (const [key, value] of Object.entries(item)) {
             return <button className={activeBtn === key ? 'field__nav__link menuBtnActive' : 'field__nav__link'}
@@ -57,9 +59,7 @@ const Menu = observer(() => {
             {hrBlock}
             <KindMenu />
             <ItemList ></ItemList>
-
         </div>
-
     )
 })
 

@@ -392,6 +392,10 @@
   .header_nav {
     padding-top: 40px;
   }
+
+  .header_mb10px {
+    margin-bottom: 10px;
+  }
 }
 
 @media only screen and (max-width: 760px) {
@@ -414,4 +418,6 @@
   .header_logo {
     display: block;
   }
+
+
 }

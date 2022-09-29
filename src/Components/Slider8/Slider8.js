@@ -21,18 +21,6 @@ const SliderInfinity = observer(() => {
         setArrItem(arr)
     }, [])
 
-    // let items = []
-    // items = arrItem.map(item =>
-    //     <div>
-    //         {item}
-    //         {/* <p>{item.weight}</p> */}
-    //         {/* <p>{item.name}</p> */}
-    //         {/* <img src={`${linkSrc}${item.img}`} alt={item.img} /> */}
-    //         {/* <img src={`https://raw.githubusercontent.com/yuraCOM/DataBase/main/images/${item.img}`} alt="" /> */}
-    //     </div >
-    // )
-
-
     let r = {
         0: {
             items: 3,

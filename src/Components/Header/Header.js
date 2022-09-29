@@ -18,12 +18,17 @@ const Header = observer(() => {
 
     return (
         <div className="header">
-            <div className="header_logo" id="logo_mobile" onClick={() => active ? setActive(false) : setActive(true)}>
-                <div className="logo">
-                    <a href="/"><img src={logo} alt='logo' /></a>
+            <Link to='/'>
+                <div className="header_logo"
+                    id="logo_mobile"
+                // onClick={() => active ? setActive(false) : setActive(true)}
+                >
+                    <div className="logo">
+                        <img src={logo} alt='logo' />
+                    </div>
                 </div>
-            </div>
-            <Link to='/menu' >
+            </Link>
+            <Link to='/menu'>
                 <div className="header_menu header_hov header_menu_batton" id="menu_mobile">
                     <span></span>
                     Меню
@@ -52,14 +57,16 @@ const Header = observer(() => {
                             </div>
                         </div>
 
-                        <Link to='/menu' onClick={() => active ? setActive(false) : setActive(true)}>
+                        <Link to='/menu' className="header_mb10px"
+                            onClick={() => active ? setActive(false) : setActive(true)}>
                             <div className="header_li header_hov header_menu_batton">
                                 <span></span>
                                 Меню
                             </div>
                         </Link>
 
-                        <Link to='/sliderInfinity' onClick={() => active ? setActive(false) : setActive(true)}>
+                        <Link to='/sliderInfinity' className="header_mb10px"
+                            onClick={() => active ? setActive(false) : setActive(true)}>
                             <div className="header_li header_hov header_blog "
                             >
                                 <span></span>
@@ -67,12 +74,14 @@ const Header = observer(() => {
                             </div>
                         </Link>
 
-                        <div className="header_li header_hov header_cab header_tg" onClick={() => window.open('https://t.me/Tet55555', 'new_window')}>
+                        <div className="header_li header_hov header_cab header_tg header_mb10px"
+                            onClick={() => window.open('https://t.me/Tet55555', 'new_window')}>
                             <span></span>
                             <a href="https://t.me/Tet55555" target="blank">Чат-бот</a>
                         </div>
                         {userStore.isAuth ?
-                            <Link to="/cabinet" onClick={() => active ? setActive(false) : setActive(true)}>
+                            <Link to="/cabinet" className="header_mb10px"
+                                onClick={() => active ? setActive(false) : setActive(true)}>
                                 <div className="header_li header_hov header_cab header_cabine"
                                 >
                                     <span></span>
@@ -80,7 +89,8 @@ const Header = observer(() => {
                                 </div>
                             </Link>
                             :
-                            <Link to="/login" onClick={() => active ? setActive(false) : setActive(true)}>
+                            <Link to="/login" className="header_mb10px"
+                                onClick={() => active ? setActive(false) : setActive(true)}>
                                 <div className="header_li header_hov header_enter "
                                     onClick={() => active ? setActive(false) : setActive(true)}
                                 >
@@ -91,7 +101,8 @@ const Header = observer(() => {
 
                         }
                         {userStore.isAuth &&
-                            < Link to="/basket" onClick={() => active ? setActive(false) : setActive(true)}>
+                            < Link to="/basket" className="header_mb10px"
+                                onClick={() => active ? setActive(false) : setActive(true)}>
                                 <div className="header_li header_hov header_basket">
                                     <span></span>
                                     Корзина {userStore.userBasket.length > 0 ? <span className='basketQty'>{userStore.userBasket.length}</span> : false}
@@ -102,8 +113,9 @@ const Header = observer(() => {
                         {/* надо пилить - если добавил товар в корзину без регистрации */}
 
                         {userStore.isAuth && userStore.user.userRole === "ADMIN" ?
-                            <div>
-                                <Link to="/admin" onClick={() => active ? setActive(false) : setActive(true)}>
+                            <div className="header_mb10px">
+                                <Link to="/admin"
+                                    onClick={() => active ? setActive(false) : setActive(true)}>
                                     <div className="header_li header_hov header_admin header_cabine"
                                     >
                                         Админ

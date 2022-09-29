@@ -8,7 +8,6 @@ const InfoModalUser = observer(({ show, onHide, user }) => {
   return (
     <Modal className="modal-add-new-dish" show={show} onHide={onHide} centered>
       <Modal.Body>
-        {/* {userInfo && userInfo} */}
         {Object.keys(user).map(key =>
           <div key={key + 'infUser'} style={{ display: "flex" }}>
             <p>{key}</p>:<p style={{ fontWeight: 'bold', marginLeft: '10px' }}>{user[key]}</p>

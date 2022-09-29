@@ -42,7 +42,6 @@ export const authRoutes = [
     },
     {
         path: "*",
-        // Component: Slider
         Component: (() => < Navigate to="/" />)
     }
 ]

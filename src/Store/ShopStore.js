@@ -1,8 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import Api from '../Api/api'
 import ApiAxios from "../Api/ApiAxios";
-
-
+// ApiAxios - не задействован - переделеа через FireStore
 
 export class ShopStore {
 

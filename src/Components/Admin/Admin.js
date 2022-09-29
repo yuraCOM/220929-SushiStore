@@ -222,9 +222,12 @@ const Admin = observer((props) => {
                 </div>
             </div>
 
-            <hr></hr>
-            <h4>Firebase</h4>
-            <button onClick={(e) => getOrders(e)}>AllOrder</button>
+            <div className="flex-col">
+                <hr></hr>
+                <h4>Firebase</h4>
+                <button onClick={(e) => getOrders(e)}>AllOrder</button>
+            </div>
+
 
             <hr></hr>
             <p>Это готовые заготовки по добавлению - для тестов</p>
@@ -245,9 +248,6 @@ const Admin = observer((props) => {
                 {/* add Order */}
                 <button onClick={(e) => addOrder(order)}> addOrder</button>
             </div>
-
-            <hr></hr>
-
 
             <hr></hr>
             {/* <button onClick={(e) => readCurrentMenu("Burgers")}> read Burgers</button> */}

@@ -46,6 +46,7 @@ const Cabinet = observer(() => {
         }
         fetchOrdersUserData()
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -93,13 +94,8 @@ const Cabinet = observer(() => {
                             className={item.orderCompleted ? "flex order-admin complited" : "flex order-admin"}>
                             <p>{moment(item.time).format('MMM Do YYYY, h:mm:ss a')}</p>
                             <p>№ {item.orderId}</p>
-                            <p>{item.totalSum}грн</p>
+                            <p>TotalSum: {item.totalSum}грн</p>
                             <p>{item.orderCompleted ? "completed" : "in work"}</p>
-                            {/* <button onClick={() => orderInfo(item.dishInOrder)}>orderInfo</button> */}
-                            {/* <div>
-                                <label htmlFor="#box4">Completed:</label>
-                                <input id="box4" onChange={(e) => chekHandler(e, item)} type="checkbox" checked={item.orderCompleted} />
-                            </div> */}
                         </div>
                     )
                 }

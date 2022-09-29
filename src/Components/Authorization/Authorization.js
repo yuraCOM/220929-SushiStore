@@ -16,12 +16,10 @@ const Authorization = observer(() => {
     const isLogin = location.pathname === LOGIN_ROUTE
     const isRegistration = location.pathname === REGISTRATION_ROUTE
 
-
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
 
     const click = async () => {
-
         if (login === '') {
             alert('Enter Login')
         }
@@ -38,7 +36,6 @@ const Authorization = observer(() => {
         getCurrentUserInfo = getCurrentUserInfo[0]
 
         if (isLogin && dataUser.auth === true) {
-            // console.log(dataUser.auth);
             if (fireStoreUsersName.includes(login)) {
                 if (getCurrentUserInfo.userPassword === password) {
                     currenUserNow.setIsAuth(true)
@@ -58,26 +55,6 @@ const Authorization = observer(() => {
         if (isLogin && !dataUser.auth) {
             alert(dataUser.messg)
         }
-
-
-        //--------
-        // if (isLogin && login && password) {
-        //     if (fireStoreUsersName.includes(login)) {
-        //         if (getCurrentUserInfo.userPassword === password) {
-        //             currenUserNow.setIsAuth(true)
-        //             currenUserNow.setUser(getCurrentUserInfo)
-        //             let data = JSON.stringify(getCurrentUserInfo);
-        //             localStorage.setItem('userSushi', data);
-        //             history(MENU_ROUTE)
-        //         }
-        //         else {
-        //             alert('Не верный Пароль !!!')
-        //         }
-        //     }
-        //     if (!fireStoreUsersName.includes(login)) {
-        //         alert('Нет такого пользователя - зарегистрируйтесь !!!')
-        //     }
-        // }
 
         //регистрация - надо переписать проверку на сервере в базе
         if (isRegistration && login && password) {

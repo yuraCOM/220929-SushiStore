@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter } from "react-router-dom"
+// eslint-disable-next-line no-unused-vars
+import { BrowserRouter, HashRouter } from "react-router-dom"
 import './App.css';
 import { useEffect } from 'react';
 import { observer } from "mobx-react-lite";
@@ -33,12 +34,13 @@ const App = observer(() => {
         currenUserNow.setUser(dataLocalStore)
       }
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
+    <HashRouter >
       <div className="App">
         <div className='content'>
           <div> <Header></Header></div>
@@ -48,7 +50,6 @@ const App = observer(() => {
         </div>
 
         <Footer></Footer>
-        {/* <DatabaseService></DatabaseService> */}
       </div>
       <MsgModal
         show={msgStore.show}
@@ -62,7 +63,8 @@ const App = observer(() => {
       />}
 
 
-    </BrowserRouter>
+    </HashRouter>
+    // {/* </BrowserRouter > */}
   );
 })
 

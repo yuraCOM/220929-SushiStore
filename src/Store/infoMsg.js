@@ -4,7 +4,6 @@ import { makeAutoObservable } from "mobx";
 export default class infoMsg {
 
     infoMsgBD = {
-
         startMsg: `Вход админа:
                 Login: 0
                 Pass: 0
@@ -36,6 +35,5 @@ export default class infoMsg {
     setMsg(txt) {
         this.msg = txt
     }
-
 
 }

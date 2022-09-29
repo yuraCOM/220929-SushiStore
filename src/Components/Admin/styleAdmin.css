@@ -19,8 +19,6 @@ button {
 
 .admin .add-del-dish {
   flex-basis: 100%;
-  /* flex-wrap: nowrap; */
-
 }
 
 .admin .add-del-dish .flex-col {
@@ -36,4 +34,16 @@ button {
 
 .admin .add-del-dish .flex-col form {
   margin: 2px;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .admin .add-del-dish .flex-col {
+    margin-bottom: 15px;
+  }
+
+  .flex-col {
+    align-items: center;
+  }
+
 }

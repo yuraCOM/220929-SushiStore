@@ -219,7 +219,6 @@ export async function updateOrderInFireBase(order) {
             console.log("key", key, '------- id =', order.orderId);
             // set(ref(db, `Orders/${key}`), order)
             update(ref(db, `Orders/${key}`), order)
-
         }
     }
 }

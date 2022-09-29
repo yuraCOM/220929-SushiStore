@@ -52,3 +52,10 @@
 .cab-user-inf .infuser {
     margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 500px) {
+
+    .cab-orders {
+        width: 92%;
+    }
+}

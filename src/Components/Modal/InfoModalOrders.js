@@ -13,7 +13,6 @@ const InfoModalOrders = observer(({ show, onHide, orders, place = '' }) => {
   let infoDish = MainStore.infoDish
   let linkSrc = shopStore.linkImgDB // путь к каритнкам на серваке гит
 
-  // let userInfo = Object.keys(user)
   let ordersArr = orders.dishInOrder.map((dish, index) =>
     < div key={str_randLen(7)}
       className="flex basket"
@@ -52,8 +51,9 @@ const InfoModalOrders = observer(({ show, onHide, orders, place = '' }) => {
   }
 
   function delDishFromOrder(orders, dishID) {
-    orders.orderCompleted ? alert("Удалить нельзя!!Заказ уже выполнен!") : console.log(orders.orderCompleted);
-    // updateOrderInFireBaeByID(orders.orderId, dishID)
+    orders.orderCompleted ?
+      alert("Удалить нельзя!!Заказ уже выполнен!")
+      : console.log(orders.orderCompleted);
   }
 
   return (

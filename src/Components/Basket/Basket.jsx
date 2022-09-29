@@ -34,7 +34,6 @@ const Basket = observer(() => {
     }
 
     async function sendOrder() {
-        // console.log(JSON.parse(JSON.stringify(userStore.userBasket)));
         // console.log(JSON.parse(JSON.stringify(userStore.user)));
 
         let order = {
@@ -45,15 +44,11 @@ const Basket = observer(() => {
             "orderCompleted": false
         }
 
-        // console.log(JSON.parse(JSON.stringify(order)));
         addOrder(await order)
         await userStore.updateUserBasket([])
 
         msgStore.setMsg(`Ваш заказ ${order.orderId} отправлен! C Вами свяжется менеджер в ближайшее время для уточнения и подтверждения деталей по заказу !!`)
         msgStore.showMsg()
-
-        // alert(`Ваш заказ ${order.orderId} отправлен - с Вами свяжется менеджер в ближайшее время!!`)
-
     }
 
     function infoDishHandler(dish) {

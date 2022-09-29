@@ -10,19 +10,15 @@ function AddFile() {
         console.log(file);
         e.preventDefault();
         const file = e.target[0].files[0];
-
         uploadFiles(file);
     };
 
-
     const uploadFiles = (file) => {
-
         if (!file) return
         const storageRef = ref(storage, `files/${file.name}`)
         uploadBytes(storageRef, file).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
-
     };
 
     return (

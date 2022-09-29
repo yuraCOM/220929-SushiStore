@@ -13,7 +13,6 @@ async function callMenuTypeFood(name) {
     shopStore.setCurrentTypeMenu(name)
     shopStore.setCureentKind('')
 
-    // let CurrenSectionMenu = await shopStore.getCurrenSectionMenu(name)
     let CurrenSectionMenu = await readCurrentMenu(name)
 
     shopStore.setCurrentMenu(await CurrenSectionMenu)
@@ -37,7 +36,6 @@ let getOrders = async () => {
     dataOrders.sort((a, b) => a.time < b.time ? 1 : -1);
 
     return await dataOrders
-    // setOrders(await dataOrders);
 }
 
 //ищем заказы юзера который залогинился

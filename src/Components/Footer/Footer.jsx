@@ -33,15 +33,13 @@ const Footer = () => {
                 </div>
                 <div className="footer_logo" id="">
                     <div className="logo">
-                        <a href="/"><img src={logo} alt='logo' /></a>
-
+                        <img src={logo} alt='logo' />
                     </div>
                 </div>
             </div >
 
             <div className="footer_bottom">
                 <p>SushiStore YurOk 2022</p>
-
             </div>
         </div>
 

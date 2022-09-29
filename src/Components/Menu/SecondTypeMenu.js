@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { MainStore } from '../../Store/MainStore'
-import { callMenuTypeFood } from '../../Tools/assist'
 
 const SecondTypeMenu = observer(() => {
 
     let shopStore = MainStore.shopStore
 
+    // eslint-disable-next-line array-callback-return
     let typeBlockSushi = shopStore.menuType.map(item => {
         for (const [key, value] of Object.entries(item)) {
             return <button className={shopStore.currentSecondType === key ? 'menuBtnSecondActive field__nav__link ' : 'field__nav__link'}
@@ -28,16 +28,13 @@ const SecondTypeMenu = observer(() => {
         shopStore.setVirtualMenu(arrSecondTypeMenu)
     }
 
-
     return (
         <div>
             {shopStore.currentType === 'SushiBar' ? <div className=' btn-menu-container btn-menu-second'>
                 {typeBlockSushi}
             </div>
                 : false}
-
         </div>
-
     )
 })
 

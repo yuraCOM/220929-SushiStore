@@ -22,6 +22,7 @@ const Item = observer((props) => {
     useEffect(() => {
         checkDishInBasket(dish) && setInBasket(true)
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userStore.userBasket.length, notSale])
 
 
