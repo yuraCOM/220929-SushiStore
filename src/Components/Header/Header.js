@@ -44,9 +44,12 @@ const Header = observer(() => {
                 <div className="header_nav_mobile" >
                     <ul className="header_nav">
                         <div className="header_li header_logo">
-                            <div className="logo" >
-                                <a href="/"><img src={logo} alt='logo' /></a>
-                            </div>
+                            <Link to='/'>
+                                <div className="logo" >
+                                    <img src={logo} alt='logo' />
+                                </div>
+                            </Link>
+
                         </div>
                         <div>
                             <div className="header_li header_contact header_number">

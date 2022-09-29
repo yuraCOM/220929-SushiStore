@@ -39,8 +39,8 @@ const App = observer(() => {
 
 
   return (
-    // <BrowserRouter>
-    <HashRouter >
+    <BrowserRouter>
+      {/* <HashRouter > */}
       <div className="App">
         <div className='content'>
           <div> <Header></Header></div>
@@ -63,8 +63,8 @@ const App = observer(() => {
       />}
 
 
-    </HashRouter>
-    // {/* </BrowserRouter > */}
+      {/* </HashRouter> */}
+    </BrowserRouter >
   );
 })
 
