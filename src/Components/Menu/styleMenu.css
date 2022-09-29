@@ -1,0 +1,74 @@
+.btn-menu-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.btn-menu-container button {
+  font-size: 12px;
+}
+.btn-menu-container button:hover {
+  /* border: 1px solid #f7922c; */
+  background-color: #68fdb8;
+}
+
+.menuBtnActive {
+  background-color: #5a93c3;
+}
+
+.menuBtnKindActive {
+  background-color: #e7ae5ba3;
+}
+
+.field__nav__link {
+  font-size: 12px;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 13px;
+  color: #495c6b;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  line-height: 0.875rem;
+  margin: 5px 0.125rem;
+  padding: 11px 0.9375rem;
+  position: relative;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-menu-second {
+  justify-content: flex-start;
+}
+
+.btn-menu-second button {
+  border: 1px solid;
+  font-size: 10px;
+  background-color: #f8f9fa;
+}
+
+.btn-menu-second .menuBtnSecondActive {
+  background-color: #68fdb8;
+}
+
+.kind-btn {
+  font-size: 12px;
+  border: 1px solid #ced4da;
+  padding: 5px;
+}
+
+@media only screen and (max-width: 425px) {
+  .btn-menu-container button {
+    font-size: 10px;
+    line-height: 0;
+    margin: 5px 0.125rem;
+    padding: 11px 0.9375rem;
+  }
+
+  .btn-menu-container {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,66 @@
+.order-admin {
+    align-items: center;
+    margin: 5px;
+    padding: 2px;
+    flex-basis: 100%;
+    flex-wrap: nowrap;
+    border-bottom: 2px solid rgb(41, 156, 233);
+}
+
+.order-admin button {
+    box-sizing: border-box;
+    border: 0;
+}
+
+
+.div-completed {
+    text-align: center;
+
+}
+
+#box4 {
+    cursor: pointer;
+}
+
+.complited {
+    background-color: rgba(21, 213, 21, 0.832);
+
+
+}
+
+
+.order-admin p {
+    margin-bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.order-admin button {
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.order-admin .btn-del-order {
+    width: 20%;
+    margin: 0 5px;
+    border: 1px solid red;
+}
+
+.order-admin .btn-orders {
+    width: 20%;
+    margin: 0 5px;
+}
+
+.order-admin button:hover {
+    /* border: 1px solid; */
+    background-color: rgb(72, 96, 205);
+}
+
+.order-admin .btn-del-order:hover {
+    background-color: red;
+}
+
+
+/* flex order-admin complited */

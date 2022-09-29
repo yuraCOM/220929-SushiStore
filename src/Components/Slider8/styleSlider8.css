@@ -1,0 +1,13 @@
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+.mini {
+  margin: 40px 0;
+}
+
+.cont-mgt80 .alice-carousel {
+  margin-top: 90px;
+}
+
+.alice-carousel__stage-item img {
+  width: 70%;
+}

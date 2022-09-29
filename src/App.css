@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.15;
+  font-family: Avenir, sans-serif;
+  background-color: #fff;
+
+
+
+}
+
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  /* начало отсчета боди */
+  /* Чтобы занимал оставшееся пространство */
+  flex-grow: 1;
+}
+
+.cont-mgt80 {
+  margin-top: 80px;
+}
+
+.cont-mgt85 {
+  margin-top: 85px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.flex-left {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-fluid {
+  margin-top: 100px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .container-fluid {
+    align-items: center;
+    margin-top: 110px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .container-fluid {
+    align-items: center;
+    margin-top: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    align-items: center;
+    margin-top: 85px;
+  }
+}
+
+@media (max-width: 425px) {
+  .cont-mgt85 {
+    margin-top: 65px;
+  }
+
+  .container-fluid {
+    align-items: center;
+    margin-top: 65px;
+  }
+
+  .flex.order-admin {
+    flex-direction: column;
+    margin-bottom: 15px
+  }
+
+  .flex.order-admin :nth-child(n) {
+    margin: 2px 0;
+  }
+
+}

@@ -1,0 +1,13 @@
+.order {
+  position: relative;
+  margin-top: 72px;
+  min-height: 550px;
+}
+
+.order_blocks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}

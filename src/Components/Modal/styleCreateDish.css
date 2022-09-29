@@ -1,0 +1,24 @@
+.modal-add-new-dish input,
+textarea {
+  margin-top: 15px;
+}
+
+.modal-add-new-dish select {
+  margin-right: 15px;
+}
+
+.modal-content textarea {
+  width: 100%;
+  margin: 0 5px 2px 10px;
+
+}
+
+.modal-body .flex-left {
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.modal-body .flex-left p {
+  width: 15%;
+  margin: 0;
+}
