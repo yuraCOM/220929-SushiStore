@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/220929-SushiStore/static/css/main.1d43dcba.css",
-    "main.js": "/220929-SushiStore/static/js/main.4b72777f.js",
+    "main.css": "/220929-SushiStore/static/css/main.ca7d1dc0.css",
+    "main.js": "/220929-SushiStore/static/js/main.b0a2aacc.js",
     "static/media/insta.png": "/220929-SushiStore/static/media/insta.79535458a8a6d88f81d4.png",
     "static/media/adm.png": "/220929-SushiStore/static/media/adm.3243c447aeb592fc9d16.png",
     "static/media/logo.png": "/220929-SushiStore/static/media/logo.7479e12ed5a00ece71de.png",
     "static/media/telega.png": "/220929-SushiStore/static/media/telega.16653560856d2f7d7495.png",
     "static/media/basket.png": "/220929-SushiStore/static/media/basket.b386cc682e5e536a7a50.png",
     "index.html": "/220929-SushiStore/index.html",
-    "main.1d43dcba.css.map": "/220929-SushiStore/static/css/main.1d43dcba.css.map",
-    "main.4b72777f.js.map": "/220929-SushiStore/static/js/main.4b72777f.js.map"
+    "main.ca7d1dc0.css.map": "/220929-SushiStore/static/css/main.ca7d1dc0.css.map",
+    "main.b0a2aacc.js.map": "/220929-SushiStore/static/js/main.b0a2aacc.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d43dcba.css",
-    "static/js/main.4b72777f.js"
+    "static/css/main.ca7d1dc0.css",
+    "static/js/main.b0a2aacc.js"
   ]
 }
