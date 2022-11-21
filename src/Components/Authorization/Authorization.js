@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite'
+import moment from 'moment'
 import React, { useState } from 'react'
 import { Button, Card, Container, Form } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
@@ -7,8 +8,15 @@ import { MainStore } from '../../Store/MainStore'
 import { LOGIN_ROUTE, MENU_ROUTE, REGISTRATION_ROUTE } from '../../Tools/consts'
 import { str_randLen } from '../../Tools/random'
 import './styleAuth.css'
+import toast, { Toaster } from 'react-hot-toast';
+
+
+
 
 const Authorization = observer(() => {
+
+    let authToast = toast
+
     let currenUserNow = MainStore.userNow
 
     const location = useLocation()
@@ -58,18 +66,19 @@ const Authorization = observer(() => {
 
         //регистрация - надо переписать проверку на сервере в базе
         if (isRegistration && login && password) {
-            console.log(fireStoreUsersName);
             if (fireStoreUsersName.includes(login)) {
                 alert('Есть такой Юзер/Логин')
-
             }
             else {
-                console.log(login, password);
                 let user = { ...MainStore.userNow.sampleUser }
+                user["regTime"] = moment(Date.now()).format('MMM Do YY, h:mm: a')
                 user["id"] = str_randLen(7)
                 user["userName"] = login
                 user["userPassword"] = password
                 addOneUserInFireBase(user)
+                authToast.success('Successfully!')
+                authToast.success(`Sign in with ${login}`)
+                history('/login')
             }
         }
     }
@@ -77,7 +86,8 @@ const Authorization = observer(() => {
     return (
         <Container className="cont-mgt85 d-flex justify-content-center align-items-center ">
             <Card style={{ width: 600 }} className="p-5">
-                <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
+                <h2 className="m-auto" style={{ color: isLogin ? '#2196f3' : '#ffc107' }}
+                >{isLogin ? 'Авторизация' : "Регистрация"}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
                         className="mt-3"
@@ -101,14 +111,20 @@ const Authorization = observer(() => {
                                 <p className='pAuth'>Есть аккаунт? жми =></p> <NavLink className='aAuth' to={LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>}
                         <Button className="mt-3 align-self-end"
+                            style={{ color: isLogin ? '#2196f3' : '#ffc107' }}
                             variant={"outline-success"}
                             onClick={click}
                         >
                             {isLogin ? 'Войти' : 'Регистрация'}
                         </Button>
+
                     </div>
                 </Form>
             </Card>
+            <Toaster
+                position="top-right"
+                reverseOrder={true}
+            />
         </Container>
     )
 })

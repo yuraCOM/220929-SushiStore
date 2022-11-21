@@ -29,6 +29,7 @@ const SliderInfinity = observer(() => {
 
     return (
         <div>
+            <h6>Тут по задумке новости, а пока тут будет бесконечная карусель с  Лисичками</h6>
             <AliceCarousel mouseTracking infinite disableDotsControls responsive={r} items={arrItem} />
         </div >
     )

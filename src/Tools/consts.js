@@ -15,6 +15,7 @@ export const REGISTRATION_ROUTE = '/registration'
 
 export const ADMIN_ROUTE = '/admin'
 export const ORDERS_ROUTE = '/orders'
+export const USERS_ROUTE = '/users'
 
 
 

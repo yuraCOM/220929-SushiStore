@@ -2,11 +2,11 @@ import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { MainStore } from '../../Store/MainStore'
-import { randomN, str_randLen } from '../../Tools/random'
+import { randomN } from '../../Tools/random'
 import CreateDish from '../Modal/CreateDish'
 import './styleAdmin.css'
 import { addToBase } from '../../Tools/assist'
-import { addOneUserInFireBase, addOrder, delDishFromFireBase, fetchDishInFB, readAllFireStoreDB } from '../../FireBase/DatabaseService'
+import { delDishFromFireBase, fetchDishInFB, readAllFireStoreDB } from '../../FireBase/DatabaseService'
 import EditDish from '../Modal/EditDish'
 import UserStore from '../../Store/UserStore'
 import { useNavigate } from 'react-router-dom'
@@ -38,9 +38,8 @@ const Admin = observer((props) => {
 
     // ---------------
 
-
-
     useEffect(() => {
+
         // eslint-disable-next-line array-callback-return
         let mainMainBtnBlock = shopStore.menuStart.map(item => {
             for (const [key, value] of Object.entries(item)) {
@@ -132,45 +131,32 @@ const Admin = observer((props) => {
     //обновление данных по выбранному айди блюда
     async function editDishInFireBase(e) {
         e.preventDefault();
-
-        let dish = await fetchDishInFB(idEditDish, editTypeFood)
-
-        // console.log(JSON.stringify(dish));
-        shopStore.updateSelectedDish(await dish)
-
-        setUpdAddDishVisible(true)
-        setIdEditDish(null)
-        setEditTypeFood('')
-        setEditT("DEFAULT")
+        if (!idEditDish) {
+            alert('Enter dish ID')
+        }
+        else if (!editTypeFood) {
+            alert('Enter type of food')
+        } else {
+            let dish = await fetchDishInFB(idEditDish, editTypeFood)
+            // console.log(JSON.stringify(dish));
+            shopStore.updateSelectedDish(await dish)
+            setUpdAddDishVisible(true)
+            setIdEditDish(null)
+            setEditTypeFood('')
+            setEditT("DEFAULT")
+        }
     }
 
-    let user1 = {
-        "userName": "3",
-        "userPassword": "3",
-        "userRole": "",
-        "userEmail": "user3@gmail.com",
-        "userPhone": "+3803333333",
-        "userDeliveryPlace": "Kiev, Gora"
-    }
-
-    async function addUserInBase(user) {
-        user1 = { ...user, "id": str_randLen(7) }
-        addOneUserInFireBase(user1)
-    }
-
-    let order = {
-        "orderId": 99999,
-        "userId": 1,
-        "orderСompleted": true,
-        "orderDishes": [{ "dishId": 1, "amount": 1 }]
-    }
-
-    function getOrders(e) {
+    function getOrders() {
         const linkToOrders = () => navigate('/orders', { replace: true })
         linkToOrders()
 
     }
 
+    function getUsers() {
+        const linkToUsers = () => navigate('/users', { replace: true })
+        linkToUsers()
+    }
 
     return (
         <div className='cont-mgt85 admin'>
@@ -204,7 +190,7 @@ const Admin = observer((props) => {
                 {/* dell по айди из конкртеного меню */}
                 <div className='flex-col'>
                     <form className='flex-col' action="submite">
-                        <p>Delete dish on ID </p>
+                        <p>Delete dish by ID </p>
                         <input type="text" placeholder='id' value={id || ""}
                             onChange={(e) => setId(e.target.value)}>
                         </input>
@@ -222,15 +208,19 @@ const Admin = observer((props) => {
                 </div>
             </div>
 
-            <div className="flex-col">
-                <hr></hr>
-                <h4>Firebase</h4>
-                <button onClick={(e) => getOrders(e)}>AllOrder</button>
+            <hr></hr>
+            <div className="firebase-container">
+                <h5>Firebase Store</h5>
+                <div className="flex-col firebase">
+                    <button onClick={(e) => getOrders()}>All Orders</button>
+                    <button onClick={(e) => getUsers()}>All Users</button>
+                </div>
             </div>
 
 
+
             <hr></hr>
-            <p>Это готовые заготовки по добавлению - для тестов</p>
+            <p>+Add готовые заготовки- для тестов</p>
             {/* это готовые заготовки по добавлению - уберу потом */}
             <div className='flex' >
                 {/* add sushi */}
@@ -244,15 +234,16 @@ const Admin = observer((props) => {
                     Add ONE Burger
                 </button>
                 {/* add one user test */}
-                <button onClick={(e) => addUserInBase(user1)}> addUser</button>
+                {/* <button onClick={(e) => addUserInBase(user1)}> addUser</button> */}
                 {/* add Order */}
-                <button onClick={(e) => addOrder(order)}> addOrder</button>
+                {/* <button onClick={(e) => addOrder(order)}> addOrder</button> */}
             </div>
 
             <hr></hr>
             {/* <button onClick={(e) => readCurrentMenu("Burgers")}> read Burgers</button> */}
-            <button onClick={(e) => readAllFireStoreDB()}> readAllFireStoreDB</button>
             {/* <button onClick={() => addOrder(order)}>add order</button> */}
+            <button onClick={(e) => readAllFireStoreDB()}> readAllFireStoreDB</button>
+            <button onClick={(e) => readAllFireStoreDB()}> readAllUsers</button>
 
             {/* modal ------- */}
             <CreateDish show={addDishVisible} onHide={() => setAddDishVisible(false)} />

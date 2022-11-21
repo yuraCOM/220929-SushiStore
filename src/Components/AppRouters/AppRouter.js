@@ -6,12 +6,12 @@ import { MainStore } from '../../Store/MainStore';
 import Slider from '../Slider/Slider';
 
 
+
 const AppRouter = observer(() => {
 
     let currenUserNow = MainStore.userNow
 
     return (
-
         <Routes>
             {currenUserNow.isAuth ? authRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} element={<Component />} />
@@ -23,8 +23,6 @@ const AppRouter = observer(() => {
             <Route path='/' element={< Navigate to={Slider} />}></Route>
             {/* <Route path='*' element={< Navigate to={Slider} />}></Route> */}
         </Routes >
-
-
     )
 })
 

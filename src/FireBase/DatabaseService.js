@@ -1,12 +1,13 @@
 import React from 'react'
-import { getDatabase, ref, onValue, set, push, remove, get, update, query, orderByChild, equalTo } from "firebase/database";
+import { getDatabase, ref, onValue, set, push, remove, get, update, query, orderByChild, equalTo, onChildChanged } from "firebase/database";
 // eslint-disable-next-line no-unused-vars
 import { storage } from './firebase' // надо обязательно
 import { str_randLen } from '../Tools/random';
 import { MainStore } from '../Store/MainStore';
-import { callMenuTypeFood, getUserOrders } from '../Tools/assist';
+import { callMenuTypeFood, getUserOrders, notifSet } from '../Tools/assist';
 
 const shopStore = MainStore.shopStore
+const adminStore = MainStore.adminStore
 let userStore = MainStore.userNow
 
 const db = getDatabase();
@@ -47,10 +48,34 @@ export async function liveOnOrder() {
                 userStore.setUserOrders(data)
             }
             fetchOrdersUserData()
-
         })
     })
 }
+
+// наблюдение за заказами
+// const orders = query(ref(db, "Orders"))
+export async function liveNewOrders() {
+    const orders = query(ref(db, "Orders"), orderByChild('orderCompleted'), equalTo(false))
+    let snapshot = await get(orders)
+    let data = await snapshot.val();
+    let qtyNotComplited = data === null ? [] : await Object.values(data);
+    adminStore.setNewOrders(await qtyNotComplited.length)
+    // console.log("func liveNewOrders", await qtyNotComplited);
+}
+
+// отслеживание изменений в заказах всех
+const ordersCompleted = query(ref(db, "Orders"))
+onValue(ordersCompleted, async (snapshot) => {
+    // await liveNewOrders()
+    let data = await snapshot.val();
+    let orders = data === null ? [] : Object.values(data);
+    let qtyNotComplited = orders.filter(order => order.orderCompleted === false).length
+    adminStore.setNewOrders(await qtyNotComplited)
+    // console.log("onValue orders change", adminStore.qtyNewOrders);
+})
+
+
+
 
 // --------------- user
 // +++++ firebase чтение юзеров всех
@@ -70,11 +95,14 @@ export async function readONEUsersFireStore(login, password) {
     let snapshot = await get(findID)
     let user = await snapshot.val();
 
-    // console.log(typeof (user));
-
     if (typeof (user) === "object") {
-        let userUpd = Object.values(user);
-        user = userUpd
+        if (user === null) {
+            user = null;
+        } else {
+            let userUpd = Object.values(user);
+            user = userUpd
+        }
+
     }
 
     let dataUser = {}
@@ -112,14 +140,28 @@ export async function updateUserInFireBase(user) {
             update(ref(db, `Users/${key}`), user)
         }
     }
-
-    // onValue - это лив наблюдение за базой
-    // onValue(currentDB, async (snapshot) => {
-    //     const data = snapshot.val();
-    // });
-
 }
-//--------------------------------------
+
+// delete user from db
+export async function delUserInFireBase(user) {
+    const db = getDatabase();
+    const currentDB = await ref(db, 'Users');
+    let snapshot = await get(currentDB)
+    let data = await snapshot.val();
+    for (const key in data) {
+        if (data[key].id === user.id) {
+            remove(ref(db, `Users/${key}`))
+        }
+    }
+}
+
+
+// get all USERS
+export let getAllUsers = async () => {
+    let dataAllUsers = await readCurrentMenu("Users")
+    // dataOrders.sort((a, b) => a.time < b.time ? 1 : -1);
+    return await dataAllUsers
+}
 
 // +++++ firebase чтение конкретного меню через get !!! так же получаю все заказы 
 export async function readCurrentMenu(name) {
@@ -156,7 +198,6 @@ export function addOneDishInFireBase(dish) {
 
 //edit dish - typeFood = store
 export async function editDishInFB(id, typeFood, dish) {
-    // console.log(id, typeFood, dish);
     const dishStore = ref(db, typeFood);
     let snapshot = await get(dishStore)
     let data = await snapshot.val();
@@ -173,10 +214,8 @@ export async function fetchDishInFB(id, typeFood) {
     const dishStore = ref(db, typeFood);
     let snapshot = await get(dishStore)
     let data = await snapshot.val();
-
     for (const key in data) {
         if ((data[key].id).toString() === id.toString()) {
-            console.log(data[key]);
             return await data[key]
         }
     }
@@ -188,8 +227,6 @@ export async function fetchDishInFB(id, typeFood) {
 export async function addChapterInFireBase() {
     const db = getDatabase();
     const DB = await ref(db, '/'); //вся база
-    // let snapshot = await get(DB)
-    // let data = await snapshot.val();
     const newOrder = push(DB);
     set(newOrder, { "Orders": {} });
 }
@@ -198,9 +235,8 @@ export async function addChapterInFireBase() {
 export async function addOrder(order) {
     const db = getDatabase();
     const Orders = await ref(db, 'Orders');
-    let snapshot = await get(Orders)
-    let data = await snapshot.val();
-    console.log(data);
+    // let snapshot = await get(Orders)
+    // let data = await snapshot.val();
     order['time'] = Date.now()
     const addOrder = push(Orders);
     set(addOrder, order);
@@ -208,15 +244,13 @@ export async function addOrder(order) {
 
 // обновление заказа - выполнен/ не выполнен
 export async function updateOrderInFireBase(order) {
-    console.log(order);
     const db = getDatabase();
     const currentDB = await ref(db, 'Orders');
     let snapshot = await get(currentDB)
     let data = await snapshot.val();
-    console.log(data);
     for (const key in data) {
         if (data[key].orderId === order.orderId) {
-            console.log("key", key, '------- id =', order.orderId);
+            // console.log("key", key, '------- id =', order.orderId);
             // set(ref(db, `Orders/${key}`), order)
             update(ref(db, `Orders/${key}`), order)
         }
@@ -225,7 +259,6 @@ export async function updateOrderInFireBase(order) {
 
 // ищем order по айди заказа
 export async function findOrderInFireBaseByID(id) {
-    console.log(id);
     const findID = query(ref(db, "Orders"), orderByChild('orderId'), equalTo(id))
     let snapshot = await get(findID)
     let data = await snapshot.val();
@@ -255,7 +288,6 @@ export async function delOrderFromFireBase(id, link) {
     let data = await snapshot.val();
     for (const key in data) {
         // remove(ref(db, `/${link}/${key}`)) // remove all
-        // console.log(data[key].orderId, "===", id);
         if (data[key].orderId === id) {
             // console.log("key", key, '------- id =', id);
             remove(ref(db, `/${link}/${key}`))
@@ -263,7 +295,7 @@ export async function delOrderFromFireBase(id, link) {
     }
 }
 
-//
+//поиск заказаов по айди юзера
 export async function findOrdersByIdUser(id) {
     // const findID = query(ref(db, "/Orders"), orderByChild('id'), equalTo(id))
     const findID = query(ref(db, "Orders"), orderByChild('user/id'), equalTo(id))
@@ -273,6 +305,30 @@ export async function findOrdersByIdUser(id) {
     data ? items = Object.values(data) : items = []
     items.sort((a, b) => a.time < b.time ? 1 : -1);
     return items;
+}
+
+//Отслеиваем заказ, который заказали
+export function followOrder(order) {
+    const refOrder = query(ref(db, "Orders"), orderByChild('orderId'), equalTo(order.orderId))
+    onValue(refOrder, (snapshot) => {
+        let data = snapshot.val();
+        let order
+        data ? order = Object.values(data)[0] : order = []
+        if (order.orderCompleted) {
+            console.log('followOrder', data);
+            // notifSet()
+        }
+    })
+}
+
+// поиск заказов юезра и отслеживанеи изм в его заказах - реалтайм отслеживание
+export async function follow(user) {
+    const userOrders = await query(ref(db, "Orders"), orderByChild('user/id'), equalTo(user.id))
+    onChildChanged(userOrders, (data) => {
+        if (data.val().orderCompleted) {
+            notifSet(data.val())
+        }
+    });
 }
 
 
@@ -290,34 +346,7 @@ export async function findOrdersByIdUser(id) {
 //     });
 // }
 
-
-//----------------------------------------------------
-
 const DatabaseService = () => {
-
-    const db = getDatabase();
-    // const allDataBase = ref(db, '/');
-    const Burgers = ref(db, 'Burgers');
-
-    //read all data => children onValue
-    onValue(Burgers, (snapshot) => {
-        const data = snapshot.val();
-        for (const key in data) {
-            if (data[key].id === undefined) {
-                console.log("key", key);
-                set(ref(db, `Burgers/${key}`), { ...data[key], id: str_randLen(6) })
-            }
-        }
-    });
-
-
-    // let key = "-N9OeGs-D0PFWizuH0Yk"
-    // //читаем объект по ключу базы
-    // const infoInObject = ref(db, `Burgers/${key}/about`);
-    // onValue(infoInObject, (snapshot) => {
-    //     const data = snapshot.val();
-    // });
-
     return (
         <div></div>
     )

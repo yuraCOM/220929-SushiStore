@@ -1,12 +1,15 @@
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Button, Form, Image } from 'react-bootstrap'
-import { addOrder } from '../../FireBase/DatabaseService'
+import { useNavigate } from 'react-router-dom'
+import { addOrder, liveNewOrders, followOrder } from '../../FireBase/DatabaseService'
 import { MainStore } from '../../Store/MainStore'
 import { str_randLen } from '../../Tools/random'
 import './bascket.css'
 
 const Basket = observer(() => {
+    const navigate = useNavigate();
+
     let userStore = MainStore.userNow
     let shopStore = MainStore.shopStore
     let linkSrc = shopStore.linkImgDB // путь к каритнкам на серваке гит
@@ -44,11 +47,22 @@ const Basket = observer(() => {
             "orderCompleted": false
         }
 
-        addOrder(await order)
-        await userStore.updateUserBasket([])
+        if (!userStore.user.userPhone || !userStore.user.userEmail || !userStore.user.userDeliveryPlace) {
+            msgStore.setMsg(`Уточните Ваши контактные данные в кабинете`)
+            msgStore.showMsg()
+            const linkToCabinet = () => navigate('/cabinet', { replace: true })
+            linkToCabinet()
 
-        msgStore.setMsg(`Ваш заказ ${order.orderId} отправлен! C Вами свяжется менеджер в ближайшее время для уточнения и подтверждения деталей по заказу !!`)
-        msgStore.showMsg()
+        }
+        else {
+            addOrder(await order)
+            await userStore.updateUserBasket([])
+            msgStore.setMsg(`Ваш заказ ${order.orderId} отправлен! C Вами свяжется менеджер в ближайшее время для уточнения и подтверждения деталей по заказу !!`)
+            msgStore.showMsg()
+            await liveNewOrders()
+            // await followOrder(order)
+
+        }
     }
 
     function infoDishHandler(dish) {
@@ -62,7 +76,7 @@ const Basket = observer(() => {
 
             {basket.length === 0
                 ?
-                <h3>У вас нет товаров в корзине...</h3>
+                <h3 className='bsk-not-item'>Нет товаров в корзине...</h3>
                 :
                 <Form
                 >
@@ -92,7 +106,6 @@ const Basket = observer(() => {
                                     // onChange={e => setCount(handleInputChange(e, dish))}
                                     onChange={e => handleInputChange(e, dish)}
                                     type="number"
-                                // style={{ width: "60px" }}
                                 />
                             </div>
                             <div>Sum: {dish.orderQty * dish.price}</div>

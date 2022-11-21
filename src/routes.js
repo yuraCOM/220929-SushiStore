@@ -2,13 +2,14 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import Admin from './Components/Admin/Admin'
 import Orders from './Components/Admin/Orders/Orders'
+import Users from './Components/Admin/Users/Users'
 import Authorization from './Components/Authorization/Authorization'
 import Basket from './Components/Basket/Basket'
 import Cabinet from './Components/Cabinet/Cabinet'
 import Menu from './Components/Menu/Menu'
 import Slider from './Components/Slider/Slider'
 import Slider8 from './Components/Slider8/Slider8'
-import { ADMIN_ROUTE, BASKET_ROUTE, CABINET_ROUTE, LOGIN_ROUTE, MENU_ROUTE, ORDERS_ROUTE, REGISTRATION_ROUTE, SLIDER_INF } from './Tools/consts'
+import { ADMIN_ROUTE, BASKET_ROUTE, CABINET_ROUTE, LOGIN_ROUTE, MENU_ROUTE, ORDERS_ROUTE, REGISTRATION_ROUTE, SLIDER_INF, USERS_ROUTE } from './Tools/consts'
 
 
 export const authRoutes = [
@@ -31,6 +32,10 @@ export const authRoutes = [
     {
         path: ORDERS_ROUTE,
         Component: Orders
+    },
+    {
+        path: USERS_ROUTE,
+        Component: Users,
     },
     {
         path: BASKET_ROUTE,

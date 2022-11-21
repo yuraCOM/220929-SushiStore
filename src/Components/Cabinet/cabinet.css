@@ -25,10 +25,15 @@
 }
 
 .cabinet .order-admin p {
-    /* margin-bottom: 0; */
     margin-right: 15px;
     width: fit-content;
     text-align: center;
+    font-size: 14px;
+    flex-basis: 100%;
+}
+
+.cabinet .order-admin .time {
+    flex-basis: 90%;
 }
 
 .cab-user-inf {
@@ -47,10 +52,17 @@
 .cab-user-inf textarea {
     margin: 0;
     margin-left: 10px;
+    padding-left: 5px;
 }
 
 .cab-user-inf .infuser {
     margin-bottom: 10px;
+}
+
+.warning {
+    color: red;
+    font-size: 12px;
+    margin: 0;
 }
 
 @media only screen and (max-width: 500px) {

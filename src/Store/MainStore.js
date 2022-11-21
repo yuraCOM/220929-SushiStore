@@ -1,3 +1,4 @@
+import AdminStore from "./AdminStore";
 import infoDishStore from "./infoDishStore";
 import infoMsg from "./infoMsg";
 import ShopStore from "./ShopStore";
@@ -7,7 +8,8 @@ export let MainStore = {
     shopStore: new ShopStore(),
     userNow: new UserStore(),
     infoMsg: new infoMsg(),
-    infoDish: new infoDishStore()
+    infoDish: new infoDishStore(),
+    adminStore: new AdminStore()
 }
 
 

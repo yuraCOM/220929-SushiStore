@@ -4,6 +4,7 @@ import { makeAutoObservable } from "mobx";
 export default class UserStore {
 
     sampleUser = {
+        "regTime": "",
         "id": "",
         "userName": "",
         "userPassword": "",

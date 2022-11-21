@@ -1,0 +1,27 @@
+.userInfo-main {
+    /* display: flex; */
+}
+
+.user-cont {
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0 10px;
+}
+
+.user-info {
+    justify-content: flex-start;
+    align-items: center;
+    /* margin: 10px; */
+    margin-bottom: 10px;
+    border-bottom: 1px solid goldenrod;
+    cursor: pointer;
+}
+
+.user-info:hover {
+    background-color: rgba(39, 72, 240, 0.508);
+}
+
+.user-info p {
+    flex-basis: 20%;
+    margin: 5px 15px;
+}

@@ -7,6 +7,7 @@ import { MainStore } from '../../Store/MainStore'
 import { observer } from 'mobx-react-lite'
 
 const Header = observer(() => {
+
     let userStore = MainStore.userNow
 
     const [active, setActive] = useState(false)
@@ -21,7 +22,6 @@ const Header = observer(() => {
             <Link to='/'>
                 <div className="header_logo"
                     id="logo_mobile"
-                // onClick={() => active ? setActive(false) : setActive(true)}
                 >
                     <div className="logo">
                         <img src={logo} alt='logo' />
@@ -148,4 +148,6 @@ const Header = observer(() => {
     )
 })
 
+
 export default React.memo(Header)
+

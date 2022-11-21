@@ -36,6 +36,18 @@ button {
   margin: 2px;
 }
 
+.firebase-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.firebase {
+  flex-direction: row;
+}
+
+
+
 @media only screen and (max-width: 500px) {
 
   .admin .add-del-dish .flex-col {
@@ -45,5 +57,7 @@ button {
   .flex-col {
     align-items: center;
   }
+
+  .admin .firebase {}
 
 }
